@@ -3,6 +3,7 @@
 ## Development
 .idea/
 venv/
+.env
 
 ## Build
 __pycache__/
