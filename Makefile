@@ -6,7 +6,7 @@ BACKEND_ROOT ?= src
 VENV_ROOT ?= venv
 PYTHON ?= $(VENV_ROOT)/bin/python3
 
-#include .env
+-include .env
 include $(BACKEND_ROOT)/Makefile
 
 
