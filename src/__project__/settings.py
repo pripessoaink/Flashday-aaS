@@ -14,9 +14,9 @@ from django.core.management.utils import get_random_secret_key
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-SETTINGS_ROOT = Path(__file__).resolve().parent
-PROJECT_ROOT = SETTINGS_ROOT.parent
-REPO_ROOT = PROJECT_ROOT.parent
+PROJECT_ROOT = Path(__file__).resolve().parent
+SOURCE_ROOT = PROJECT_ROOT.parent
+REPO_ROOT = SOURCE_ROOT.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -83,6 +84,9 @@ DATABASES = {
     }
 }
 
+FIXTURE_DIRS = [
+    PROJECT_ROOT / 'fixtures'
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -118,3 +122,6 @@ USE_TZ = True
 
 STATIC_ROOT = REPO_ROOT / 'static'
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = REPO_ROOT / 'media'
+MEDIA_URL = '/media/'
