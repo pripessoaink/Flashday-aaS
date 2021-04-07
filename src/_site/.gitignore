@@ -1,0 +1,7 @@
+# This file specifies untracked files to be ignored by git
+
+##Build
+node_modules/
+package-lock.json
+**/css/
+

@@ -1,9 +1,10 @@
 SHELL := /bin/bash
 
 BACKEND_ROOT ?= $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
-DJANGO_ADMIN ?= $(BACKEND_ROOT)/manage.py
-PYTHON ?= python3
+FRONTEND_ROOT ?= $(BACKEND_ROOT)/_site
 
+PYTHON ?= python3
+DJANGO_ADMIN ?= $(BACKEND_ROOT)/manage.py
 
 init:: veryclean requirements.txt isolate
 	$(PYTHON) -m pip install --upgrade pip
@@ -18,8 +19,11 @@ run::
 build:: compile
 	$(PYTHON) $(DJANGO_ADMIN) makemigrations
 	$(PYTHON) $(DJANGO_ADMIN) migrate
+	$(PYTHON) $(DJANGO_ADMIN) loaddata auth flashday priscilla-pessoa bruna-beatriz rafaela-lunawi johnny-dayverson
+	$(PYTHON) $(DJANGO_ADMIN) default_option Pequeno Médio Grande
+	$(PYTHON) $(DJANGO_ADMIN) set_prices P:397 M:597 G:797
 
-compile:: clean
+compile::
 	$(PYTHON) $(DJANGO_ADMIN) collectstatic --noinput
 
 test::
@@ -27,6 +31,7 @@ test::
 
 clean::
 	rm -fr static
+	$(PYTHON) $(DJANGO_ADMIN) reset_migrations _site flashday
 	rm -fr db.sqlite3
 
 veryclean:: clean

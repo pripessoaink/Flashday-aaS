@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'reset_migrations',
+    '_site',
     'pripessoaink.flashday',
 ]
 
@@ -67,6 +69,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
             ],
+            'builtins': [
+                '_site.templatetags.utils',
+            ]
         },
     },
 ]
@@ -125,3 +130,9 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = REPO_ROOT / 'media'
 MEDIA_URL = '/media/'
+
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

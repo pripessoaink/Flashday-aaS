@@ -2,12 +2,14 @@ SHELL := /bin/bash
 
 REPO_ROOT ?= $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 BACKEND_ROOT ?= src
+FRONTEND_ROOT ?= $(BACKEND_ROOT)/_site
 
 VENV_ROOT ?= venv
 PYTHON ?= $(VENV_ROOT)/bin/python3
 
 -include .env
-include $(BACKEND_ROOT)/Makefile
+-include $(BACKEND_ROOT)/Makefile
+-include $(FRONTEND_ROOT)/Makefile
 
 
 help:: ## Show this help
@@ -37,7 +39,7 @@ veryclean:: clean ## Delete all generated files
 	rm -fr venv
 
 deploy:: build ## Deploy service(s) at Google App Engine
-	gcloud config set project $(PROJECT_ID)
+	gcloud config set project $(GAE_PROJECT_ID)
 	gcloud app deploy
 	gcloud app browse
 
